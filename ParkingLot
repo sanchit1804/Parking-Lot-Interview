@@ -1,21 +1,28 @@
 public class Main {
 
     static class ParkingLot {
-        private boolean[] spots;
+        private int[] spots;
         private int n;
+        
 
         ParkingLot(int size){
             this.n = size;
-            spots = new boolean[size];
+            spots = new int[size];
         }
 
-        void park(){
-            for(int i = 0; i < n; i++){
-                if(!spots[i]){
-                    spots[i] = true;
-                    System.out.println("Parked at Spot: " + i);
-                    return;
+        void park(int CarNumber){
+            if(CarNumber>=1000 && CarNumber<=9999){
+                for(int i = 0; i < n; i++){
+                    if(spots[i]==0){
+                        spots[i] = CarNumber;
+                        System.out.println("Parked at Spot " + i + " is occupied by " + CarNumber);
+                        return;
+                    }
                 }
+            }
+            else{
+                System.out.println("Invalid CarNumber");
+                return;
             }
             System.out.println("Parking Full");
         }
@@ -26,10 +33,10 @@ public class Main {
                 return;
             }
 
-            if(!spots[x]){
+            if(spots[x]==0){
                 System.out.println("Slot already empty");
             } else {
-                spots[x] = false;
+                spots[x] = 0;
                 System.out.println("Slot " + x + " is now free");
             }
         }
@@ -38,14 +45,10 @@ public class Main {
     public static void main(String[] args) {
         ParkingLot p1 = new ParkingLot(3);
 
-        p1.park();
-        p1.park();
-        p1.park();
-        p1.park();
-
-        p1.leave(1);
-        p1.leave(1);  
-        p1.leave(4);
-        p1.leave(-1);
+        p1.park(4660);
+        p1.park(455);
+        p1.leave(1); 
+        p1.leave(4);  
+        p1.leave(-1); 
     }
 }
